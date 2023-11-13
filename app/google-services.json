@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "131736866328",
+    "project_id": "chatclonecoding",
+    "storage_bucket": "chatclonecoding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131736866328:android:73a43a337cd1547cf17d6d",
+        "android_client_info": {
+          "package_name": "com.example.chattingappclonecoding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL3xpOsi148LDsXtQJtCwQ6_E5IyMsbN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
