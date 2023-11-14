@@ -42,6 +42,8 @@ class SignUpActivity : AppCompatActivity() {
         // db 초기화
         mDbRef = Firebase.database.reference
 
+        supportActionBar?.hide()
+
         // 회원가입 버튼 이벤트
         binding.signUpBtn.setOnClickListener {
             // trim()은 앞뒤 공백을 잘라줌

@@ -26,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
         // 인증 초기화
         mAuth = Firebase.auth
 
+        supportActionBar?.hide()
+
         // 로그인 버튼 이벤트
         binding.loginBtn.setOnClickListener {
             // trim()은 앞뒤 공백을 잘라줌
