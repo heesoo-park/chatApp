@@ -1,9 +1,13 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chattingappclonecoding.DataClasses.Message
+import com.example.chattingappclonecoding.Adapters.MessageAdapter
+import com.example.chattingappclonecoding.DataClasses.Room
+import com.example.chattingappclonecoding.DataClasses.User
 import com.example.chattingappclonecoding.databinding.ActivityChatBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -11,6 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
+import kotlinx.coroutines.NonCancellable.children
 
 class ChatActivity : AppCompatActivity() {
     // 받는 사용자의 이름
@@ -57,11 +63,22 @@ class ChatActivity : AppCompatActivity() {
 
         // 접속자의 uId
         val senderUid = mAuth.currentUser?.uid
+        var senderName: String = ""
+
+        mDbRef.child("user").child(senderUid!!).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                    val userInfo = snapshot.getValue(User::class.java)
+                    Log.d("dkj", "${userInfo}")
+                    senderName = userInfo?.name!!
+                }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
 
         // 보내는 유저의 채팅방
         senderRoom = receiverUid + senderUid
 
-        // 받는 유저의 채팅방방
+        // 받는 유저의 채팅방
         receiverRoom = senderUid + receiverUid
 
         // 액션바에 상대방 이름 보여주기
@@ -71,7 +88,7 @@ class ChatActivity : AppCompatActivity() {
         binding.sendBtn.setOnClickListener {
             val message = binding.messageEdit.text.toString()
             // 메시지 객체로 변환
-            val messageObject = Message(message, senderUid)
+            val messageObject = Message(message, senderUid, receiverUid)
 
             // 보내는 쪽 채팅방 경로에 데이터 저장
             mDbRef.child("chats").child(senderRoom).child("messages").push()
@@ -80,6 +97,10 @@ class ChatActivity : AppCompatActivity() {
                     mDbRef.child("chats").child(receiverRoom).child("messages").push()
                         .setValue(messageObject)
                 }
+
+            mDbRef.child("rooms").child(senderUid!!).child(receiverUid).setValue(Room(receiverName, receiverUid, message)).addOnSuccessListener {
+                mDbRef.child("rooms").child(receiverUid).child(senderUid).setValue(Room(senderName, senderUid, message))
+            }
 
             // 입력메시지 초기화
             binding.messageEdit.setText("")

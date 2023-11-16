@@ -1,12 +1,16 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.Adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.chattingappclonecoding.Activities.ChatActivity
+import com.example.chattingappclonecoding.R
+import com.example.chattingappclonecoding.DataClasses.User
 
 class UserAdapter(private val context: Context, private val userList: ArrayList<User>): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     // 화면 설정
@@ -33,7 +37,6 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
         holder.itemView.setOnClickListener {
             // 채팅 액티비티로 이동
             val intent: Intent = Intent(context, ChatActivity::class.java)
-
             // 이동할 액티비티로 넘길 데이터
             intent.putExtra("name", currentUser.name)
             intent.putExtra("uId", currentUser.uId)

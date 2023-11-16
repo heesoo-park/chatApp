@@ -1,4 +1,4 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.DataClasses
 
 data class User(
     // 이름

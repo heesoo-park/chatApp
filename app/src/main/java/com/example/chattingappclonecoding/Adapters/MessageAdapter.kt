@@ -1,12 +1,13 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.Adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.chattingappclonecoding.DataClasses.Message
+import com.example.chattingappclonecoding.R
 import com.google.firebase.auth.FirebaseAuth
 
 // ViewHolder를 두 가지 사용하기 때문에 MessageAdapter.(만든 ViewHolder)를 쓰는 것이 아니라 RecyclerView.ViewHolder를 사용하여 상황에 맞는 ViewHolder를 매칭

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/friends_menu"
+        android:enabled="true"
+        android:icon="@drawable/btn_friends_menu"
+        android:title="Friends" />
+
+    <item
+        android:id="@+id/talk_menu"
+        android:enabled="true"
+        android:icon="@drawable/btn_talk_menu"
+        android:title="Talk" />
+
+    <item
+        android:id="@+id/profile_menu"
+        android:enabled="true"
+        android:icon="@drawable/btn_profile_menu"
+        android:title="Profile" />
+</menu>

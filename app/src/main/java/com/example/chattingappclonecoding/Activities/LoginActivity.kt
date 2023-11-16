@@ -1,4 +1,4 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

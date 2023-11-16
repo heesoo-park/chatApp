@@ -1,4 +1,4 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.example.chattingappclonecoding.R
+import com.example.chattingappclonecoding.ViewModels.SignUpViewModel
+import com.example.chattingappclonecoding.DataClasses.User
 import com.example.chattingappclonecoding.databinding.ActivitySignupBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.FirebaseAuth
@@ -107,11 +110,15 @@ class SignUpActivity : AppCompatActivity() {
                 if (p0.toString().isNotEmpty()) {
                    if (!Patterns.EMAIL_ADDRESS.matcher(p0.toString()).matches()) {
                        signUpModel.setFlagEmail(false)
-                       binding.emailEdit.setTextColor(ContextCompat.getColor(applicationContext, R.color.red))
+                       binding.emailEdit.setTextColor(ContextCompat.getColor(applicationContext,
+                           R.color.red
+                       ))
                        checkFlags()
                    } else {
                        signUpModel.setFlagEmail(true)
-                       binding.emailEdit.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+                       binding.emailEdit.setTextColor(ContextCompat.getColor(applicationContext,
+                           R.color.black
+                       ))
                    }
                 }
             }
@@ -130,13 +137,17 @@ class SignUpActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 if (p0.toString().isNotEmpty()) {
                     if (p0.toString().length < 8) {
-                        setPasswordText(View.VISIBLE, "invalid password(need more 8 characters)", R.color.red, false)
+                        setPasswordText(View.VISIBLE, "invalid password(need more 8 characters)",
+                            R.color.red, false)
                     } else if (p0.toString().length >= 20) {
-                        setPasswordText(View.VISIBLE, "invalid password(need less 20 characters)", R.color.red, false)
+                        setPasswordText(View.VISIBLE, "invalid password(need less 20 characters)",
+                            R.color.red, false)
                     } else if (!p0.toString().contains("[A-Z]".toRegex())) {
-                        setPasswordText(View.VISIBLE, "invalid password(need A~Z)", R.color.red, false)
+                        setPasswordText(View.VISIBLE, "invalid password(need A~Z)",
+                            R.color.red, false)
                     } else if (!p0.toString().contains("[0-9]".toRegex())) {
-                        setPasswordText(View.VISIBLE, "invalid password(need 0~9)", R.color.red, false)
+                        setPasswordText(View.VISIBLE, "invalid password(need 0~9)",
+                            R.color.red, false)
                     } else {
                         setPasswordText(View.VISIBLE, "valid password", R.color.teal_700, true)
                     }
@@ -156,9 +167,11 @@ class SignUpActivity : AppCompatActivity() {
                 if (binding.passwordEdit.text.toString().isNotEmpty()) {
                     if (p0.toString().isNotEmpty()) {
                         if (binding.passwordEdit.text.toString() == p0.toString()) {
-                            setCheckPasswordText(View.VISIBLE, "correct password", R.color.teal_700, f1 = true, f2 = true)
+                            setCheckPasswordText(View.VISIBLE, "correct password",
+                                R.color.teal_700, f1 = true, f2 = true)
                         } else {
-                            setCheckPasswordText(View.VISIBLE, "incorrect password", R.color.red, f1 = true, f2 = false)
+                            setCheckPasswordText(View.VISIBLE, "incorrect password",
+                                R.color.red, f1 = true, f2 = false)
                         }
                     } else {
                         setCheckPasswordText()

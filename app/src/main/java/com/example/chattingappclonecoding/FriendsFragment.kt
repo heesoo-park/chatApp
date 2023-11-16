@@ -1,13 +1,13 @@
 package com.example.chattingappclonecoding
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chattingappclonecoding.Adapters.UserAdapter
+import com.example.chattingappclonecoding.DataClasses.User
 import com.example.chattingappclonecoding.databinding.ActivityMainBinding
+import com.example.chattingappclonecoding.databinding.FragmentFriendsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -17,10 +17,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class MainActivity : AppCompatActivity() {
-
+class FriendsFragment : Fragment(R.layout.fragment_friends) {
     // 레이아웃과 액티비티 연결을 위한 바인딩 변수
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentFriendsBinding
     // User 데이터 클래스와 리사이클러뷰를 잇기 위한 어댑터 변수
     lateinit var adapter: UserAdapter
     // 파이어베이스 인증과 실시간 데이터베이스 사용을 위한 변수들
@@ -29,12 +28,10 @@ class MainActivity : AppCompatActivity() {
     // 리사이클러뷰에 넣을 User 객체들을 모아놓는 리스트
     lateinit var userList: ArrayList<User>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // 바인딩
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        binding = FragmentFriendsBinding.bind(view)
         // 인증 초기화
         mAuth = Firebase.auth
         // DB 초기화
@@ -42,10 +39,10 @@ class MainActivity : AppCompatActivity() {
         // 리스트 초기화
         userList = ArrayList()
         // 어댑터 초기화
-        adapter = UserAdapter(this, userList)
+        adapter = UserAdapter(this.requireContext(), userList)
 
         // 리사이클러뷰 세팅
-        binding.userRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.userRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.userRecyclerView.adapter = adapter
 
         // 사용자 정보 가져오기
@@ -69,26 +66,5 @@ class MainActivity : AppCompatActivity() {
                 // 에러가 난 경우에 실행
             }
         })
-    }
-    // AppBar의 우측 상단에 옵션 메뉴를 세팅하는 함수
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    // 옵션 메뉴의 아이템들을 선택했을 때
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // 로그아웃을 누른 경우
-        if (item.itemId == R.id.logout) {
-            // 파이어베이스 내의 메서드를 이용하여 로그아웃
-            mAuth.signOut()
-            // LoginActivity로 이동
-            val intent: Intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            // 현재 액티비티는 종료
-            finish()
-            return true
-        }
-        return true
     }
 }

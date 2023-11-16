@@ -1,4 +1,4 @@
-package com.example.chattingappclonecoding
+package com.example.chattingappclonecoding.ViewModels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
