@@ -35,12 +35,11 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
 
         // 유저 클릭 이벤트
         holder.itemView.setOnClickListener {
-            // 채팅 액티비티로 이동
             val intent: Intent = Intent(context, ChatActivity::class.java)
             // 이동할 액티비티로 넘길 데이터
             intent.putExtra("name", currentUser.name)
             intent.putExtra("uId", currentUser.uId)
-
+            // 채팅 액티비티로 이동
             context.startActivity(intent)
         }
     }

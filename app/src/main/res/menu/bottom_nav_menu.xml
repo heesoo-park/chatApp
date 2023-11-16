@@ -18,3 +18,4 @@
         android:icon="@drawable/btn_profile_menu"
         android:title="Profile" />
 </menu>
+    <!-- BottomNavigationView용 메뉴들 -->

@@ -5,34 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingappclonecoding.R
-import com.example.chattingappclonecoding.DataClasses.User
-import com.example.chattingappclonecoding.Adapters.UserAdapter
-import com.example.chattingappclonecoding.FriendsFragment
-import com.example.chattingappclonecoding.ProfileFragment
-import com.example.chattingappclonecoding.TalkFragment
+import com.example.chattingappclonecoding.Fragments.FriendsFragment
+import com.example.chattingappclonecoding.Fragments.ProfileFragment
+import com.example.chattingappclonecoding.Fragments.TalkFragment
 import com.example.chattingappclonecoding.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-
     // 레이아웃과 액티비티 연결을 위한 바인딩 변수
     private lateinit var binding: ActivityMainBinding
-
     // 파이어베이스 인증을 위한 변수
     private lateinit var mAuth: FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         // 인증 초기화
         mAuth = Firebase.auth
 
+        // 초기 액션바 제목 설정
         supportActionBar?.title = "friends"
 
         // 프래그먼트 전환 설정

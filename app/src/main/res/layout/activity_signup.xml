@@ -65,6 +65,7 @@
             android:inputType="textPassword"
             android:paddingStart="15dp" />
 
+        <!-- 비밀번호 볼 수 있는 버튼 -->
         <ImageButton
             android:id="@+id/passwordVisible_btn"
             android:layout_width="match_parent"
@@ -106,6 +107,7 @@
             android:inputType="textPassword"
             android:paddingStart="15dp" />
 
+        <!-- 비밀번호 볼 수 있는 버튼 -->
         <ImageButton
             android:id="@+id/check_passwordVisible_btn"
             android:layout_width="match_parent"

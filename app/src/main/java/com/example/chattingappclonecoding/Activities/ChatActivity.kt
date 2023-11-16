@@ -29,6 +29,7 @@ class ChatActivity : AppCompatActivity() {
     // 파이어베이스 인증과 실시간 데이터베이스 사용을 위한 변수들
     lateinit var mAuth: FirebaseAuth
     lateinit var mDbRef: DatabaseReference
+
     // 받는 사람의 채팅방
     private lateinit var receiverRoom: String
     // 보내는 사람의 채팅방
@@ -65,6 +66,7 @@ class ChatActivity : AppCompatActivity() {
         val senderUid = mAuth.currentUser?.uid
         var senderName: String = ""
 
+        // 접속자의 이름
         mDbRef.child("user").child(senderUid!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                     val userInfo = snapshot.getValue(User::class.java)
@@ -98,7 +100,9 @@ class ChatActivity : AppCompatActivity() {
                         .setValue(messageObject)
                 }
 
+            // 보내는 사람의 입장에서 방 데이터 저장
             mDbRef.child("rooms").child(senderUid!!).child(receiverUid).setValue(Room(receiverName, receiverUid, message)).addOnSuccessListener {
+                // 저장 성공하면 받는 사람의 입장에서도 방 데이터 저장
                 mDbRef.child("rooms").child(receiverUid).child(senderUid).setValue(Room(senderName, senderUid, message))
             }
 
